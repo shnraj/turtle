@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="turtle.css">
+        <script type="text/javascript" src="turtle.js"></script>
+    </head>
+    <body onload="go();">
+        <div id="canvases">
+            <canvas id="layerLines" width="300" height="300" style="border:1px solid #000000;">
+            </canvas>
+            <canvas id="layerTurtle" width="300" height="300" style="border:1px solid #000000;">
+            </canvas>
+        </div>
+        <div>
+        <form>
+            <input type="text" id="move">
+            <input type="button" value="Draw" onclick="go();" />
+        </form>
+        </div>
+    </body>
+</html>
