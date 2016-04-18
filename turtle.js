@@ -42,8 +42,8 @@ function draw() {
         this.rotate(ctxTurt, curX, curY, -num);
     }
 
-    //ctxTurt.clearRect(0, 0, 300, 300);
-    //this.turt(ctxTurt, curX, curY);
+    ctxTurt.clearRect(0, 0, 300, 300);
+    this.turt(ctxTurt, curX, curY);
   }
 }
 
