@@ -1,5 +1,6 @@
 var curX = 149;
 var curY = 149;
+var angle = 0;
 
 var turtSize = 4;
 
@@ -34,21 +35,11 @@ function draw() {
     }
 
     if (instruction === "rt") {
-        p = this.blah(ctx, curX, curY, 27, num);
-        curX = p.x;
-        curY = p.y;
+        this.rotate(ctxTurt, curX, curY, num);
     }
 
     if (instruction === "lt") {
-        p = this.blah(ctx, curX, curY, -27, num);
-        curX = p.x;
-        curY = p.y;
-    }
-
-    if (instruction === "r") {
-        p = this.rotate(ctxTurt, curX, curY);
-        curX = p.x;
-        curY = p.y;
+        this.rotate(ctxTurt, curX, curY, -num);
     }
 
     //ctxTurt.clearRect(0, 0, 300, 300);
@@ -62,38 +53,37 @@ function turt(ctxTurt, curX, curY) {
       ctxTurt.stroke();
 }
 
-function rotate(ctxTurt, curX, curY) {
+function rotate(ctxTurt, curX, curY, rotate_angle) {
     ctxTurt.clearRect(0, 0, 300, 300);
     ctxTurt.save();
     ctxTurt.translate(curX, curY);
-    ctxTurt.rotate(Math.PI / 4);
+    var new_angle = angle + parseInt(rotate_angle)
+    var rad_angle = new_angle * (Math.PI/180);
+    ctxTurt.rotate(rad_angle);
     ctxTurt.fillRect(-turtSize/2, -turtSize/2, turtSize, turtSize);
     ctxTurt.restore();
-    return new Point(curX, curY);
-}
-
-function blah(ctx, curX, curY, angle, length) {
-    // Stroked triangle
-    var rad_angle = angle * (Math.PI/180);
-    ctx.beginPath();
-    ctx.moveTo(curX, curY);
-    var x = Math.round(curX + length * Math.sin(rad_angle));
-    var y = Math.round(curY - length * Math.cos(rad_angle));
-    ctx.lineTo(x, y);
-    //ctx.lineTo(45,125);
-    ctx.stroke();
-    return new Point(x, y);
+    angle = new_angle;
 }
 
 // if dist is negative move backward, if dist is positive move forward
-function line(ctx, curX, curY, dist) {
-    ctx.beginPath();
-    ctx.moveTo(curX, curY);
-    var x = curX
-    var y = curY - dist
+function line(ctx, curX, curY, length) {
+    if (angle != 0) {
+        // Stroked triangle
+        var rad_angle = angle * (Math.PI/180);
+        ctx.beginPath();
+        ctx.moveTo(curX, curY);
+        var x = Math.round(curX + length * Math.sin(rad_angle));
+        var y = Math.round(curY - length * Math.cos(rad_angle));
+    } else {
+        ctx.beginPath();
+        ctx.moveTo(curX, curY);
+        var x = curX
+        var y = curY - length
+    }
     ctx.lineTo(x, y);
     ctx.stroke();
     return new Point(x, y);
+
 }
 
 function Point(x, y) {
