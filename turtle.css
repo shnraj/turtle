@@ -1,3 +1,7 @@
+body {
+    text-align: center;
+}
+
 #canvases #layerTurtle {
     margin-left: -306px;
 }

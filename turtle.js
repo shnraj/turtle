@@ -26,12 +26,18 @@ function draw() {
         p = this.line(ctx, curX, curY, num);
         curX = p.x;
         curY = p.y;
+
+        ctxTurt.clearRect(0, 0, 300, 300);
+        this.turt(ctxTurt, curX, curY);
     }
 
     if (instruction === "bk") {
         p = this.line(ctx, curX, curY, -num);
         curX = p.x;
         curY = p.y;
+
+        ctxTurt.clearRect(0, 0, 300, 300);
+        this.turt(ctxTurt, curX, curY);
     }
 
     if (instruction === "rt") {
@@ -41,16 +47,13 @@ function draw() {
     if (instruction === "lt") {
         this.rotate(ctxTurt, curX, curY, -num);
     }
-
-    ctxTurt.clearRect(0, 0, 300, 300);
-    this.turt(ctxTurt, curX, curY);
   }
 }
 
 function turt(ctxTurt, curX, curY) {
-      ctxTurt.beginPath();
-      ctxTurt.fillRect(curX - turtSize/2, curY -  turtSize/2, turtSize, turtSize);
-      ctxTurt.stroke();
+    ctxTurt.beginPath();
+    ctxTurt.fillRect(curX - turtSize/2, curY -  turtSize/2, turtSize, turtSize);
+    ctxTurt.stroke();
 }
 
 function rotate(ctxTurt, curX, curY, rotate_angle) {
